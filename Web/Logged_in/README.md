@@ -1,8 +1,6 @@
 # Challenge Logged In
 
-47 Points
-
-# Challenge
+## Challenge
 
 Phew, we totally did not set up our mail server yet. This is bad news since nobody can get into their accounts at the moment... It'll be in our next sprint. Until then, since you cannot login: enjoy our totally finished software without account.
 
@@ -29,7 +27,7 @@ We even added new features to this better server, like server-side Wee evaluatio
 To make server-side Wee the language of the future, we already implemented awesome runtime functions. To make sure our VM is 100% safe and secure, there are also assertion functions in server-side Wee that you don't have to be concerned about.
 
 
-# Solution
+## Solution
 
 In the server.py we find the following important code for this challenge:
 

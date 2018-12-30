@@ -93,3 +93,48 @@ Where:
 
  - `e` is our exponent (cube root) of **3**
  - `c` is our 'encrypted' text ![equation](https://latex.codecogs.com/gif.latex?b^{e})
+
+We get the encrypted flag from http://35.207.189.79/wee/encryptiontest:
+```
+{
+    "enc": "650802889626540392576254226480769958677174063746262298961949406725587937603370598056914641680440287141866554424868358513810586735136666559905873773370795301824775736764582520414393058823900835653671443326759384479590622850329114068561701339992264327486363426970702107667234446480134526246514585103292832378240690398119481568246551291749012927947948046185733533974179911092159848587\n"
+}
+```
+
+calculating the cube root of such a big number is not easy. All common implementations use rounding which gives wrong results.
+
+Therefore we need to do it the same way as the encryption is done. Chrome has the `BigInt` class that we can use.
+
+```
+function cubicRoot(a) 
+{ 
+  let d = Math.floor((a.toString(2).length-1)/3); // binary digits nuber / 3
+  let r = 2n ** BigInt(d+1); // right boundary approximation
+  let l = 2n ** BigInt(d);   // left boundary approximation
+  let x=BigInt(l); 
+  let o=BigInt(0);           // old historical value
+  
+  while(1) {
+    o = x;
+    y = x * x * x;      
+    y<a ? l=x : r=x;      
+    if(y==a) return x;
+    x = l + (r - l)/2n;      
+    if(o==x) return false;
+  }
+}
+```
+(thank you StackOverflow: https://stackoverflow.com/questions/53878669/find-cube-root-using-limited-math-operators)
+
+Now we can encrypt the flag:
+```
+flag = BigInt('650802889626540392576254226480769958677174063746262298961949406725587937603370598056914641680440287141866554424868358513810586735136666559905873773370795301824775736764582520414393058823900835653671443326759384479590622850329114068561701339992264327486363426970702107667234446480134526246514585103292832378240690398119481568246551291749012927947948046185733533974179911092159848587')
+
+console.log('cubicRoot(flag):   ', cubicRoot( flag ).toString());
+cRoot(a):    8665956223801194705910664403122110405720001050525470730432277700963464398434592579641823005644197683478657391968391208645510483
+```
+
+convert to HEX:
+333543335F4F55525F43525950544F5F49535F41535F4C454749545F41535F4D4F53545F43525950544F5F43555252454E43494553
+
+convert to ASCII: `35C3_OUR_CRYPTO_IS_AS_LEGIT_AS_MOST_CRYPTO_CURRENCIES`

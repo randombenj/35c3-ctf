@@ -78,7 +78,7 @@ externals.addFunction(
 
 So basicaly we calculate the following equation: ![equation](https://latex.codecogs.com/gif.latex?b^{e}\bmod&space;N)
 
-With where:
+Where:
 
  - `b` is our secret as a `BigInt`
  - `e` is our exponent prime number **3**
@@ -87,3 +87,9 @@ With where:
 Because we use for `e` such a small number and for `N` a very big publick key, we can simply ignore the modulo operation
 and we basicaly have the equation ![equation](https://latex.codecogs.com/gif.latex?b^{e}) without modulo.
 
+To decrypt the message we simply need to calculate the **cube root** of our encrypted message ![equation](https://latex.codecogs.com/gif.latex?\sqrt[e]{c})
+
+Where:
+
+ - `e` is our exponent (cube root) of **3**
+ - `c` is our 'encrypted' text ![equation](https://latex.codecogs.com/gif.latex?b^{e})

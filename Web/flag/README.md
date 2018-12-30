@@ -1,5 +1,5 @@
 
-# Challenge Equality Error
+# Challenge Flags
 
 ## Challenge
 

@@ -1,8 +1,10 @@
 # 35c3-ctf
 
-*This repository contanins documentation on how some of the 35c3 junior ctf challanges were solved by us*
+*This repository contanins documentation of how we've solved some of the 35c3 junior ctf challenges.*
 
-You can find a folder for every topic and in those one for every challange including some prerequisites.
+We've accomplished to finish at rank [**31** out of **529** teams](https://github.com/randombenj/35c3-ctf/blob/master/scoreboard.png) who've all completed at least one challenge.
+
+You can find a folder for every category and in those one for every challenge including some prerequisites.
 
 Thanks to the collaborators:
 

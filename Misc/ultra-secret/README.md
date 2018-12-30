@@ -89,7 +89,7 @@ PASS_LEN = 32
 guessed_chars = []
 
 for i in range(PASS_LEN):
-    best_char = ("a", float("-inf"))
+    best_char = (None, float("-inf"))
     for c in POSSIBLE_CHARS:
         # construct the new password guess
         guess = (

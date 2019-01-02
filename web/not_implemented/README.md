@@ -102,3 +102,5 @@ root@blackbox:# curl -X POST -d @payload.txt "http://35.207.132.47/wee/run"
 ```
 
 Flag: 35C3_I_AM_TOO_LAZY_TO_BUILD_THIS_JUST_TAKE_THE_FLAG_JEEZ
+
+Funny sidenote: The exploit in this challenge we could possible also get all other flags that are saved in flags.py (challenges that are based of paperbots) :trophy:

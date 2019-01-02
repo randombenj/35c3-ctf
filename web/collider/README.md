@@ -10,40 +10,48 @@ http://35.207.133.246
 
 ## Solution
 
-The website allows to upload 2 pdf files. As the challenge says, the PDFs must have the same md5 hash sum and some given words in it.
+After shortly looking at the website, there are 2 file upload input field on it to upload files. Also the source code can be found at http://35.207.133.246/src.tgz. As the challenge says, the PDFs must have the same md5 hash sum and some given words in it. Maybe it's possible to get around the php code of the compare...
 
-As md5 as a "bit" broken, this attack is possible. There is even an existing tool that can manipulate 2 files to have the same md5 checksum: https://github.com/cr-marcstevens/hashclash
+As md5 as a "bit" broken, let's just try to attack MD5. There is an existing tool that can manipulate 2 files to have the same md5 checksum: https://github.com/cr-marcstevens/hashclash
 
-After downloading and compiling hashclash, the 2 PDFs with the given texts are created and given as input files to hashclash:
+So we create 2 PDFs (with libreOffice Writer) with the words "NO FLAG!" and another with the words "GIVE FLAG!" in it. Then we run Hashclash for this 2 files.
 
-```
-root@blackbox:# ./scripts/cpc.sh ../giveflag.pdf ../noflag.pdf 
-Chosen-prefix file 1: ../giveflag.pdf
-Chosen-prefix file 2: ../noflag.pdf
-Birthday search for MD5 chosen-prefix collisions
-Copyright (C) 2009 Marc Stevens
-http://homepages.cwi.nl/~stevens/
-
-IHV1 = {1755234546,4022845013,1581847193,3217075462}
-IHV1 = f2c09e6855bec7ef9912495e06adc0bf
-
-IHV2 = {961669933,172686064,584466100,324994096}
-IHV2 = 2deb5139f0fa4a0ab43ed62230045f13
-
-Maximum amount of memory in MB for trails: 100 (local: 100)
-Estimated number of trails that will be stored:    1872457 (local: 1872457)
-Estimated number of trails that will be generated: 1061342
-Estimated complexity per trail: 2^(17)
-Estimated complexity on trails: 2^(37.0175)
-Estimated complexity on collisions: 2^(27.7053)
-
-Thread 3 created.
-Thread 1 created.
-Thread 2 created.
-Thread 4 created.
+Unlucky, Hashclash took way to long on our hardware, so lets try another approach: There is another POC around, that is way faster then Hashclash: https://github.com/corkami/pocs. After downloading it and running the pdf.py script, the generation was done in under a second. Wow.
 
 ```
+root@blackbox:# python ./pocs/collisions/scripts/pdf.py giveflag.pdf noflag.pdf
 
-Now we have to wait... according to some papers this can take several hours. After nearly overheating the laptop, there was still no collision found... and the batterie goes empty :(
+KEEP CALM and IGNORE THE NEXT ERRORS
+error: cannot recognize xref format
+warning: trying to repair broken xref
+warning: repairing PDF document
 
-So we have not solved this challenge, but with some more computer power this would likely be possible with hashclash.
+collision1.pdf:
+
+PDF-1.3
+
+Pages: 1
+
+Retrieving info from pages 1-1...
+
+
+collision2.pdf:
+
+PDF-1.3
+
+Pages: 1
+
+Retrieving info from pages 1-1...
+
+MD5: 97f5289a50a930d4fc4b66134d155bac
+Success!
+```
+
+Checking the MD5 hash of the 2 new generated PDFs:
+```
+root@blackbox:# md5sum collision*
+97f5289a50a930d4fc4b66134d155bac  collision1.pdf
+97f5289a50a930d4fc4b66134d155bac  collision2.pdf
+```
+
+So we can upload this two files and there we get the flag: 35C3_N3v3r_TrusT_MD5

